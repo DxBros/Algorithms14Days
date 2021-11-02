@@ -1,65 +1,10 @@
 class Solution {
 public:
-    void swap(int* p,int i, int j){
-        int temp = *(p+i);
-       *(p+i)=*(p+j);
-        *(p+j) = temp;
-        
-    }
-    
-    vector<int> sortedSquares(vector<int>& nums) {
-        if(nums.size()==1){
-            nums[0] = pow(nums[0],2);
-            return nums;
-        }
-        else{
-                int p1=-1;
-                for(int i=0;i<nums.size()-1;i++){
-                    if(nums[i]<0 && nums[i+1]>=0){
-                        p1=i;
-                        break;
-                    }
-                }
-                if(p1!=-1){
-                    for(int i=0;i<nums.size();i++){
-                        nums[i] *=nums[i];
-                    }
-                    int p2 =p1+1,k=0;
-                    vector<int> ans(nums.begin(),nums.end());
-                    while(p2<nums.size() && p1>=0){
-                        if(nums[p2]<nums[p1]){
-                            ans[k] = nums[p2];
-                            k++,p2++;
-                        }
-                        else {
-                            ans[k] = nums[p1];
-                            k++,p1--;
-                        }
-                    }
-                    while(p2<nums.size()){
-                        ans[k]= nums[p2];
-                        k++,p2++;
-                    }
-                    while(p1>=0){
-                        ans[k]= nums[p1];
-                        k++,p1--;
-                    }
-                    return ans;
-                }
-            else if(nums[0]<0){
-                    for(int i=0;i<nums.size();i++){
-                        nums[i] *=nums[i];
-                    }
-                    reverse(nums.begin(),nums.end());
-                    return nums;
-                }
-            else{
-                    for(int i=0;i<nums.size();i++){
-                        nums[i] *=nums[i];
-                    }
-                    return nums;
-            }
-                
-            }
+    void rotate(vector<int>& nums, int k) {
+            int n = nums.size();
+            k %= n;
+            reverse(nums.begin(),nums.begin()+(n-k));
+            reverse(nums.begin()+(n-k),nums.end());
+            reverse(nums.begin(),nums.end());
     }
 };
