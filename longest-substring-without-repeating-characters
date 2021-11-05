@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int map[256]{};
+        memset(map,-1,256*sizeof(int));
+        int ctn{0};
+        int start{0};
+        int max_len{0};
+        for(int i=0;i<s.size();i++){
+            int& p = map[s[i]];
+            if(p!=-1 && p>=start){
+                ctn = i - p;
+                start = p+1;
+            }
+            else{
+                ctn++;
+                max_len = max(max_len,ctn);
+            }
+            p=i;
+        }
+        return max_len;
+    }
+};
